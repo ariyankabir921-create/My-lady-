@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Gift for You</title>
+<style>
+body {
+margin: 0;
+padding: 0;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+background: linear-gradient(135deg, #ffe6f2, #fff0f5);
+font-family: 'Arial', sans-serif;
+overflow: hidden;
+position: relative;
+}
+.container {
+text-align: center;
+z-index: 2;
+}
+.gift-box {
+width: 100px;
+height: 100px;
+background-color: #ff4d4d;
+margin: 0 auto;
+position: relative;
+cursor: pointer;
+border-radius: 10px;
+box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+transition: transform 0.3s;
+}
+.gift-box:hover {
+transform: scale(1.05);
+}
+.gift-box::before {
+content: '';
+position: absolute;
+width: 20px;
+height: 100px;
+background-color: #ffcc00;
+left: 40px;
+}
+.gift-box::after {
+content: '';
+position: absolute;
+width: 100px;
+height: 20px;
+background-color: #ffcc00;
+top: 40px;
+}
+.lid {
+width: 120px;
+height: 30px;
+background-color: #ff3333;
+position: absolute;
+top: -30px;
+left: -10px;
+border-radius: 5px;
+cursor: pointer;
+transition: transform 0.5s, top 0.5s;
+z-index: 3;
+}
+.lid::before {
+content: '';
+position: absolute;
+width: 20px;
+height: 30px;
+background-color: #ffcc00;
+left: 50px;
+}
+.open .lid {
+transform: translateY(-50px) rotate(-10deg);
+top: -60px;
+}
+.letter {
+display: none;
+background: white;
+padding: 40px;
+border-radius: 15px;
+box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 80%;
+max-width: 500px;
+z-index: 4;
+max-height: 80vh;
+overflow-y: auto;
+}
+.petal {
+position: absolute;
+background-color: #ffb3e6;
+border-radius: 50% 50% 50% 50% / 80% 80% 20% 20%;
+opacity: 0.7;
+animation: fall linear infinite;
+}
+@keyframes fall {
+to {
+transform: translateY(100vh) rotate(360deg);
+}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="gift-box" onclick="openGift()">
+<div class="lid"></div>
+</div>
+</div>
+<div class="letter" id="letter">
+<h2>To My Dearest,</h2>
+<p>I love everything about you, and I'm so incredibly lucky to have you. Even when things get busy, you bring so much joy and light into my life. Thank you for being you.</p>
+<p>Forever and always yours,</p>
+<p><strong>Your Love</strong></p>
+</div>
+<script>
+function openGift() {
+document.querySelector('.gift-box').classList.add('open');
+setTimeout(() => {
+document.getElementById('letter').style.display = 'block';
+startPetals();
+}, 500);
+}
+function startPetals() {
+setInterval(() => {
+const petal = document.createElement('div');
+petal.classList.add('petal');
+petal.style.left = Math.random() * 100 + 'vw';
+petal.style.animationDuration = Math.random() * 3 + 2 + 's';
+petal.style.width = Math.random() * 15 + 10 + 'px';
+petal.style.height = petal.style.width;
+document.body.appendChild(petal);
+setTimeout(() => {
+petal.remove();
+}, 5000);
+}, 300);
+}
+</script>
+</body>
+</html>
+
+
